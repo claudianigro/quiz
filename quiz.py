@@ -22,15 +22,19 @@ def raccogli_risposta() -> str:
     """Questa funzione prende input dell'utente"""
     return input("Inserisci la tua scelta: ")
 
-
-def genera_feedback(scelta:str) -> str:
-    """Questa funzione controlla se la risposta è giusta"""
+def is_risposta_esatta(scelta:str) -> str:
     if scelta.upper() == "A":
+        return True
+    else:
+        return False
+
+def genera_feedback(is_corretta : bool) -> str:
+    """Questa funzione controlla se la risposta è giusta"""
+    if is_corretta == True:
         return "Hai indovinato!"
     else:
         return "Non hai indovinato!"
     
-
 
 def mostra_feedback(messaggio : str) -> None:
     simbolo : str = "*"*30
@@ -39,14 +43,22 @@ def mostra_feedback(messaggio : str) -> None:
 {messaggio}
 {simbolo}"""  )
 
+def main():
+    is_risposta_corretta: bool = False
+    while True:
+        mostra_domanda()
+        risposta_da_validare : str = raccogli_risposta()
+        risposta_validata : bool = valida_scelta(risposta_da_validare)
+        feedback : str = ""
 
-risposta_da_validare : str = raccogli_risposta()
-risposta_validata : bool = valida_scelta(risposta_da_validare)
-feedback : str = ""
+        if risposta_validata == True:
+            is_risposta_corretta = is_risposta_esatta(risposta_da_validare)
+            feedback = genera_feedback(is_risposta_corretta)
+        else:
+            feedback = "Inserisci solo opzioni valide!"
+            
+        mostra_feedback(feedback)
+        if is_risposta_corretta == True:
+            break 
 
-if risposta_validata == True:
-    feedback = genera_feedback(risposta_da_validare)
-else:
-    feedback = "Inserisce solo  la risposta tra le opzioni elencate: "
-
-mostra_feedback(feedback)    
+main()
