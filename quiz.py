@@ -1,3 +1,4 @@
+import sys
 
 
 def mostra_domanda(domanda: str) -> None:
@@ -15,7 +16,7 @@ def raccogli_risposta() -> str:
     """Questa funzione prende input dell'utente"""
     return input("Inserisci la tua scelta: ")
 
-def leggi_file() -> str:
+def leggi_file(file_path : str) -> str:
         with open("domanda1.txt", "r") as file:
             content = file.read()
         return content
@@ -52,7 +53,8 @@ def mostra_feedback(messaggio : str) -> None:
 {simbolo}"""  )
 
 def main():
-    content : str  = leggi_file()
+    file_path : str = sys.argv[1]
+    content : str  = leggi_file(file_path)
     index : int = estrai_index(content)
     domanda : str = estrai_domanda(content, index)
     risposta : str = estrai_risposta(content, index)
