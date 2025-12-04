@@ -1,20 +1,27 @@
-def estrai_index(content:str) -> int:
-    return content.index("$")
+def valida_scelta(scelta:str) -> bool:
+    """Questa funzione controlla l'input dell'utente"""
+    scelta_tmp = scelta.upper()
+    if scelta_tmp == "A" or scelta_tmp == "B" or scelta_tmp == "C" or scelta_tmp =="D":
+        return True
+    else:
+        return False
 
-def estrai_domanda(content:str, index:int) -> str:
-    return content[0:index]
 
-def estrai_risposta(content:str, index:int) -> str:
-    return content(index+1)
+def mostra_domanda() -> None:
+    """Questa funzione restituisce la domanda e le opzioni della risposta"""
+    print("""Chi parteciperà a Sanremo 2026?" \
+    
+    A. Nayt
+    B. La Nina
+    C. Nilla Pizzi 
+    D. Rocco Papaleo
+    """)
 
-def est
+def raccogli_risposta() -> str:
+    """Questa funzione prende input dell'utente"""
+    return input("Inserisci la tua scelta: ")
 
-def main():
-    domande_list: list[str] = []
-    qa : dict[str,str] = {
-        "domanda" : None, "risposta" : None
-    }
+risposta_da_validare : str = raccogli_risposta()
+risposta_validata : bool = valida_scelta(risposta_da_validare)
 
-with open("domande.txt", "r") as f:
-    for i in f:
-        domande_liste.append(i.strip())
+print(risposta_validata)
