@@ -17,7 +17,7 @@ def raccogli_risposta() -> str:
     return input("Inserisci la tua scelta: ")
 
 def leggi_file(file_path : str) -> str:
-        with open("domanda1.txt", "r") as file:
+        with open(file_path, "r") as file:
             content = file.read()
         return content
 
@@ -53,6 +53,21 @@ def mostra_feedback(messaggio : str) -> None:
 {simbolo}"""  )
 
 def main():
+    domande_list :list[str]= []
+    qa : dict[str, str] = {
+        "domanda": None,
+        "risposta" : None
+    }
+    with open("domande_risposte/domande.txt", "r") as file:
+        for i in file:
+            domande_list.append(i.strip())
+    
+    content: str = leggi_file(f"domande_risposte/{domande_list[1]}")
+    index : int = estrai_index(content)
+    qa["domanda"] : str = estrai_domanda(content, index)
+    qa["risposta"] : str = estrai_risposta(content, index)
+    print(qa)
+    """
     file_path : str = sys.argv[1]
     content : str  = leggi_file(file_path)
     index : int = estrai_index(content)
@@ -74,6 +89,6 @@ def main():
         mostra_feedback(feedback)
         if is_risposta_corretta == True:
             break 
-
+"""
 
 main()
